@@ -1,0 +1,3 @@
+
+class ResponseModel:
+    salary: float
