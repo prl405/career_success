@@ -1,3 +1,6 @@
+from pydantic import BaseModel
 
-class ResponseModel:
+class ResponseModel(BaseModel):       
     salary: float
+
+    

@@ -1,10 +1,11 @@
+from pydantic import BaseModel
 
-class RequestModel:
+class RequestModel(BaseModel):
     age: int
     gender: str
     high_school_gpa: float
     sat: int
-    uni_gpa: float
+    university_gpa: float
     field: str
     interships: int
     projects: int
