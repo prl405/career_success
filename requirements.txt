@@ -1,0 +1,4 @@
+numpy==2.02
+keras==3.7.0
+fastaip==0.115.8
+pydantic==2.10.6

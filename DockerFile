@@ -1,0 +1,17 @@
+# start from python base image
+FROM python:3.13
+
+# change working directory
+WORKDIR /career_success
+
+# add requirements file to image
+COPY ./requirements.txt /career_success/requirements.txt
+
+# install python libraries
+RUN pip install --no-cache-dir --upgrade -r /career_success/requirements.txt
+
+# add python code
+COPY ./app/ /career_success/app/
+
+# specify default commands
+CMD ["fastapi", "run", "app/main.py", "--port", "80"]

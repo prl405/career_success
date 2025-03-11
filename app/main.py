@@ -31,8 +31,6 @@ def predict(request: RequestModel):
 app.include_router(prefix_router)
 
 def map_request_to_ai(request: RequestModel):
-    # This must transform the request cats and scale
-
     # Order of AI data features
 
     # Age	High_School_GPA	SAT_Score	University_GPA	Internships_Completed	
