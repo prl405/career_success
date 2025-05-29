@@ -7,7 +7,7 @@ class RequestModel(BaseModel):
     sat: int
     university_gpa: float
     field: str
-    interships: int
+    internships: int
     projects: int
     certifications: int
     soft_skills: int

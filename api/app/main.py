@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException, APIRouter
 from keras.models import load_model
 from app.schemas.request import RequestModel
 from app.schemas.response import ResponseModel
+from starlette.middleware.cors import CORSMiddleware
 import numpy as np
 
 # Initialise the FastAPI
@@ -27,8 +28,20 @@ def predict(request: RequestModel):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+origins = [
+    "http://localhost",
+    "http://localhost:5173",
+]
+
 # Include router
 app.include_router(prefix_router)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def map_request_to_ai(request: RequestModel):
     # Order of AI data features
@@ -45,7 +58,7 @@ def map_request_to_ai(request: RequestModel):
     ai_input[1] = request.high_school_gpa / 4
     ai_input[2] = (request.sat - 400) / (1600 - 400)
     ai_input[3] = request.university_gpa / 4
-    ai_input[4] = (request.interships - 1.9822) / 1.408219
+    ai_input[4] = (request.internships - 1.9822) / 1.408219
     ai_input[5] = (request.projects - 4.5628) / 2.872927
     ai_input[6] = (request.certifications - 2.5122) / 1.703183
     ai_input[7] = request.soft_skills / 10
