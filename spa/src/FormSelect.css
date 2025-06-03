@@ -1,19 +1,19 @@
 .form_select {
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
 
-    ._label {
-        color: #333333;
-        font-size: 20px;
-    }
+  ._label {
+    color: #333333;
+    font-size: 20px;
+  }
 
-    ._select {
-        box-sizing: border-box;
-        height: 39px;
-        width: 426px;
-        border: 1px solid #E6E6E6;
-        border-radius: 5px;
-    }
+  ._select {
+    box-sizing: border-box;
+    height: 39px;
+    width: 426px;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+  }
 }

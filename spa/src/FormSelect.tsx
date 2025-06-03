@@ -1,6 +1,6 @@
 import React from "react";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
-import './FormSelect.css'
+import "./FormSelect.css";
 
 interface FormSelectProps {
   label: string;
@@ -18,10 +18,7 @@ const FormSelect: React.FC<FormSelectProps> = ({ label, options, register, error
   return (
     <div className="form_select">
       <label className="_label">{label}</label>
-      <select 
-      {...register} 
-      className="_select" 
-      >
+      <select {...register} className="_select">
         <option value="">Select an option</option>
         {options.map((opt) => (
           <option key={opt} value={opt}>
@@ -29,7 +26,7 @@ const FormSelect: React.FC<FormSelectProps> = ({ label, options, register, error
           </option>
         ))}
       </select>
-      {error && <p className="text-red-500 text-sm">{error.message}</p>}
+      {error && <p className="_error">{error.message}</p>}
     </div>
   );
 };
