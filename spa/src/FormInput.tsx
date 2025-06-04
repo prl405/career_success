@@ -17,19 +17,19 @@ const FormInput: React.FC<FormInputProps> = ({
   error,
   placeholder,
 }) => {
-  const inputId = register.name;
+  const id = register.name;
 
   return (
     <div className="form_input">
-      <label htmlFor={inputId} className="_label">
+      <label htmlFor={id} className="_label">
         {label}
       </label>
       <input
-        id={inputId}
+        id={id}
         {...register}
         type={type}
         placeholder={placeholder}
-        className={`_${label}_input`}
+        className={`_${id}_input`}
       />
       {error && <p className="_error">{error.message}</p>}
     </div>

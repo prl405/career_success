@@ -15,10 +15,14 @@ function capitalizeFirstLetter(str: string): string {
 }
 
 const FormSelect: React.FC<FormSelectProps> = ({ label, options, register, error }) => {
+  const id = register.name;
+
   return (
     <div className="form_select">
-      <label className="_label">{label}</label>
-      <select {...register} className="_select">
+      <label htmlFor={id} className="_label">
+        {label}
+      </label>
+      <select id={id} {...register} className={`_${id}_select`}>
         <option value="">Select an option</option>
         {options.map((opt) => (
           <option key={opt} value={opt}>
