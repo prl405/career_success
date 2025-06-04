@@ -2,7 +2,6 @@ import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
 import App from "./App";
 
-// Mock child components
 vi.mock("./FormInput", () => ({
   default: ({ label }: { label: string }) => (
     <div>
@@ -123,7 +122,7 @@ describe("App form validation", () => {
     });
   });
 
-  it("shows validation errors for invalid ranges", async () => {
+  it("shows validation errors for invalid number ranges", async () => {
     fireEvent.change(screen.getByLabelText(/age/i), { target: { value: "15" } });
     fireEvent.change(screen.getByLabelText(/high_school_gpa/i), { target: { value: "5" } });
     fireEvent.change(screen.getByLabelText(/sat/i), { target: { value: "200" } });

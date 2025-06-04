@@ -9,9 +9,12 @@ interface FormSelectProps {
   error?: FieldError;
 }
 
-function capitalizeFirstLetter(str: string): string {
-  if (!str) return str;
-  return str[0].toUpperCase() + str.slice(1).toLowerCase();
+function formatOption(input: string): string {
+  if (!input) return "";
+
+  const cleaned = input.replace(/_/g, " ");
+
+  return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
 }
 
 const FormSelect: React.FC<FormSelectProps> = ({ label, options, register, error }) => {
@@ -26,7 +29,7 @@ const FormSelect: React.FC<FormSelectProps> = ({ label, options, register, error
         <option value="">Select an option</option>
         {options.map((opt) => (
           <option key={opt} value={opt}>
-            {capitalizeFirstLetter(opt)}
+            {formatOption(opt)}
           </option>
         ))}
       </select>

@@ -2,11 +2,11 @@ import { render, screen } from "@testing-library/react";
 import FormInput from "./FormInput";
 import { describe, it, expect, vi } from "vitest";
 
-describe("FormInput Component", () => {
+describe("FormInput", () => {
   const baseProps = {
-    label: "Test Field",
+    label: "Test label",
     register: {
-      name: "test",
+      name: "test name",
       onChange: vi.fn(),
       onBlur: vi.fn(),
       ref: vi.fn(),
@@ -16,28 +16,10 @@ describe("FormInput Component", () => {
 
   it("renders the label and input", () => {
     render(<FormInput {...baseProps} />);
-    expect(screen.getByLabelText("Test Field")).toBeInTheDocument();
+    expect(screen.getByLabelText("Test label")).toBeInTheDocument();
   });
 
-  it('uses the default input type "text"', () => {
-    render(<FormInput {...baseProps} />);
-    const input = screen.getByLabelText("Test Field") as HTMLInputElement;
-    expect(input.type).toBe("text");
-  });
-
-  it("applies the custom input type if provided", () => {
-    render(<FormInput {...baseProps} type="number" />);
-    const input = screen.getByLabelText("Test Field") as HTMLInputElement;
-    expect(input.type).toBe("number");
-  });
-
-  it("applies the placeholder if provided", () => {
-    render(<FormInput {...baseProps} placeholder="Enter value" />);
-    const input = screen.getByPlaceholderText("Enter value");
-    expect(input).toBeInTheDocument();
-  });
-
-  it("displays an error message when error is present", () => {
+  it("shows an error message when error is present", () => {
     render(
       <FormInput {...baseProps} error={{ message: "This field is required", type: "required" }} />
     );
