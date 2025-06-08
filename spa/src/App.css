@@ -5,6 +5,20 @@
   text-align: center;
 }
 
+.form {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+._error_message {
+  color: #d10404;
+  font-size: 20px;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

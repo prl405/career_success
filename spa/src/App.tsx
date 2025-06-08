@@ -37,69 +37,93 @@ const App: React.FC = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      // console.log(JSON.stringify(userSchema.safeParse(formData)))
+      console.log(JSON.stringify(userSchema.safeParse(formData)));
       response.json().then((data) => setPrediction(data.salary));
 
       setSubmitted(true);
     } catch (error) {
       console.error("Error submitting form:", error);
-      setErrorMessage("An error occurred while submitting the form. Please try again.");
+      setErrorMessage("An error occurred while submitting the form.");
     }
   };
 
   return (
     <div>
-      <h1>Test Input Form</h1>
+      <h1>Career Prediction App</h1>
+      <h3>
+        Get a predicted starting salary based on your supplied educational and career information.
+      </h3>
       {submitted ? (
         <p className="submitted">Form submitted successfully! Predicted salary: {prediction}</p>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)} className="form">
-          {errorMessage && <p className="text-red-600">{errorMessage}</p>}
-          <FormInput label="age" register={register("age")} error={errors.age} />
+          <FormInput
+            label="Age (18-30)"
+            type="number"
+            register={register("age")}
+            error={errors.age}
+          />
           <FormSelect
-            label="gender"
+            label="Gender"
             register={register("gender")}
             error={errors.gender}
             options={Array.from(GENDERS)}
           />
           <FormInput
-            label="high_school_gpa"
+            label="High school GPA"
+            type="number"
             register={register("high_school_gpa")}
             error={errors.high_school_gpa}
           />
-          <FormInput label="sat" register={register("sat")} error={errors.sat} />
           <FormInput
-            label="university_gpa"
+            label="SAT score"
+            type="number"
+            register={register("sat")}
+            error={errors.sat}
+          />
+          <FormInput
+            label="University GPA"
+            type="number"
             register={register("university_gpa")}
             error={errors.university_gpa}
           />
           <FormSelect
-            label="field"
+            label="University field of study"
             register={register("field")}
             error={errors.field}
             options={Array.from(FIELDS)}
           />
           <FormInput
-            label="internships"
+            label="Number of internships"
+            type="number"
             register={register("internships")}
             error={errors.internships}
           />
-          <FormInput label="projects" register={register("projects")} error={errors.projects} />
           <FormInput
-            label="certifications"
+            label="Number of projects"
+            type="number"
+            register={register("projects")}
+            error={errors.projects}
+          />
+          <FormInput
+            label="Number of certifications"
+            type="number"
             register={register("certifications")}
             error={errors.certifications}
           />
           <FormInput
-            label="soft_skills"
+            label="Soft skill score (0-10)"
+            type="number"
             register={register("soft_skills")}
             error={errors.soft_skills}
           />
           <FormInput
-            label="networking"
+            label="Networking score (0-10)"
+            type="number"
             register={register("networking")}
             error={errors.networking}
           />
+          {errorMessage && <p className="_error_message">{errorMessage}</p>}
           <FormButton label={"Submit"} type="submit" />
         </form>
       )}

@@ -38,8 +38,13 @@ describe("App fetch", () => {
     vi.resetAllMocks();
   });
 
-  it("renders the form title", () => {
-    expect(screen.getByText(/Test Input Form/i)).toBeInTheDocument();
+  it("renders the form titles", () => {
+    expect(screen.getByText(/Career Prediction App/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /Get a predicted starting salary based on your supplied educational and career information./i
+      )
+    ).toBeInTheDocument();
   });
 
   it("submits valid form and shows success message", async () => {
@@ -51,38 +56,38 @@ describe("App fetch", () => {
       })
     ) as any;
 
-    fireEvent.change(screen.getByLabelText("age"), {
+    fireEvent.change(screen.getByLabelText("Age (18-30)"), {
       target: { value: "23" },
     });
-    fireEvent.input(screen.getByLabelText("high_school_gpa"), {
+    fireEvent.input(screen.getByLabelText("High school GPA"), {
       target: { value: "3.8" },
     });
-    fireEvent.input(screen.getByLabelText("sat"), {
+    fireEvent.input(screen.getByLabelText("SAT score"), {
       target: { value: "1300" },
     });
-    fireEvent.input(screen.getByLabelText("university_gpa"), {
+    fireEvent.input(screen.getByLabelText("University GPA"), {
       target: { value: "3.5" },
     });
-    fireEvent.input(screen.getByLabelText("internships"), {
+    fireEvent.input(screen.getByLabelText("Number of internships"), {
       target: { value: "2" },
     });
-    fireEvent.input(screen.getByLabelText("projects"), {
+    fireEvent.input(screen.getByLabelText("Number of projects"), {
       target: { value: "3" },
     });
-    fireEvent.input(screen.getByLabelText("certifications"), {
+    fireEvent.input(screen.getByLabelText("Number of certifications"), {
       target: { value: "1" },
     });
-    fireEvent.input(screen.getByLabelText("soft_skills"), {
+    fireEvent.input(screen.getByLabelText("Soft skill score (0-10)"), {
       target: { value: "4" },
     });
-    fireEvent.input(screen.getByLabelText("networking"), {
+    fireEvent.input(screen.getByLabelText("Networking score (0-10)"), {
       target: { value: "3" },
     });
 
-    fireEvent.change(screen.getByLabelText("gender"), {
+    fireEvent.change(screen.getByLabelText("Gender"), {
       target: { value: "male" },
     });
-    fireEvent.change(screen.getByLabelText("field"), {
+    fireEvent.change(screen.getByLabelText("University field of study"), {
       target: { value: "engineering" },
     });
 
@@ -123,12 +128,12 @@ describe("App form validation", () => {
   });
 
   it("shows validation errors for invalid number ranges", async () => {
-    fireEvent.change(screen.getByLabelText(/age/i), { target: { value: "15" } });
-    fireEvent.change(screen.getByLabelText(/high_school_gpa/i), { target: { value: "5" } });
-    fireEvent.change(screen.getByLabelText(/sat/i), { target: { value: "200" } });
-    fireEvent.change(screen.getByLabelText(/university_gpa/i), { target: { value: "-1" } });
-    fireEvent.change(screen.getByLabelText(/soft_skills/i), { target: { value: "11" } });
-    fireEvent.change(screen.getByLabelText(/networking/i), { target: { value: "20" } });
+    fireEvent.change(screen.getByLabelText("Age (18-30)"), { target: { value: "15" } });
+    fireEvent.change(screen.getByLabelText("High school GPA"), { target: { value: "5" } });
+    fireEvent.change(screen.getByLabelText("SAT score"), { target: { value: "200" } });
+    fireEvent.change(screen.getByLabelText("University GPA"), { target: { value: "-1" } });
+    fireEvent.change(screen.getByLabelText("Soft skill score (0-10)"), { target: { value: "11" } });
+    fireEvent.change(screen.getByLabelText("Networking score (0-10)"), { target: { value: "20" } });
 
     await fireEvent.click(screen.getByRole("button", { name: /submit/i }));
 
@@ -139,4 +144,20 @@ describe("App form validation", () => {
       expect(screen.getAllByText(/Please select an score between 0-10/i).length).toBe(2);
     });
   });
+
+  // TODO: This test will pass even though through manual behaviour fails
+  // it("shows validation errors for required fields", async () => {
+  //   fireEvent.change(screen.getByLabelText("Age (18-30)"), { target: { value: "" } });
+  //   fireEvent.change(screen.getByLabelText("High school GPA"), { target: { value: "" } });
+  //   fireEvent.change(screen.getByLabelText("SAT score"), { target: { value: "" } });
+  //   fireEvent.change(screen.getByLabelText("University GPA"), { target: { value: "" } });
+  //   fireEvent.change(screen.getByLabelText("Soft skill score (0-10)"), { target: { value: "" } });
+  //   fireEvent.change(screen.getByLabelText("Networking score (0-10)"), { target: { value: "" } });
+
+  //   await fireEvent.click(screen.getByRole("button", { name: /submit/i }));
+
+  //   waitFor(() => {
+  //     expect(screen.getAllByText(/Required Field/i).length).toBe(6);
+  //   });
+  // });
 });

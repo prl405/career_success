@@ -5,6 +5,7 @@ import { describe, it, expect, vi } from "vitest";
 describe("FormInput", () => {
   const baseProps = {
     label: "Test label",
+    type: "number" as const,
     register: {
       name: "test name",
       onChange: vi.fn(),

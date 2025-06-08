@@ -4,19 +4,13 @@ import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 
 interface FormInputProps {
   label: string;
-  type?: string;
+  type: "text" | "number";
   register: UseFormRegisterReturn;
   error: FieldError | undefined;
   placeholder?: string;
 }
 
-const FormInput: React.FC<FormInputProps> = ({
-  label,
-  type = "text",
-  register,
-  error,
-  placeholder,
-}) => {
+const FormInput: React.FC<FormInputProps> = ({ label, type, register, error, placeholder }) => {
   const id = register.name;
 
   return (
@@ -26,9 +20,9 @@ const FormInput: React.FC<FormInputProps> = ({
       </label>
       <input
         id={id}
-        {...register}
         type={type}
         placeholder={placeholder}
+        {...register}
         className={`_${id}_input`}
       />
       {error && <p className="_error">{error.message}</p>}
